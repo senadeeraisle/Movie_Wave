@@ -14,7 +14,7 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   final _pages = [HomePage(), NowPlaying(), TvShowsPage(), SearchPage()];
   int _selectedIndex = 0;
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
