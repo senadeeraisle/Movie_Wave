@@ -49,4 +49,26 @@ class MovieService {
       return [];
     }
   }
+
+  //method to search movies
+
+  Future<List<Movie>> searchMovie(String query) async {
+    String url =
+        "https://api.themoviedb.org/3/search/movie?query=$query&api_key=$_apiKey";
+
+    try {
+      final response = await http.get(Uri.parse(url));
+
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        List<dynamic> result = data["results"];
+        return result.map((movie) => Movie.fromJson(movie)).toList();
+      } else {
+        throw Exception("error on searching movie");
+      }
+    } catch (error) {
+      print("Error on searching movies: $error");
+      throw Exception("error on searching movie");
+    }
+  }
 }
