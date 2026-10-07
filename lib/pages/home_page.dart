@@ -57,25 +57,28 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Home Page")),
-      body: NotificationListener<ScrollNotification>(
-        onNotification: (ScrollNotification notification) {
-          if (!_isLoading &&
-              notification.metrics.pixels ==
-                  notification.metrics.maxScrollExtent) {
-            _fetchMovies();
-          }
-          return true;
-        },
-        child: ListView.builder(
-          itemCount: _movies.length + (_isLoading ? 1 : 0),
-          shrinkWrap: true,
-          itemBuilder: (context, index) {
-            if (index == _movies.length) {
-              return Center(child: CircularProgressIndicator());
+      body: Padding(
+        padding: const EdgeInsets.only(top: 15),
+        child: NotificationListener<ScrollNotification>(
+          onNotification: (ScrollNotification notification) {
+            if (!_isLoading &&
+                notification.metrics.pixels ==
+                    notification.metrics.maxScrollExtent) {
+              _fetchMovies();
             }
-            final movie = _movies[index];
-            return MovieCard(movie: movie);
+            return true;
           },
+          child: ListView.builder(
+            itemCount: _movies.length + (_isLoading ? 1 : 0),
+            shrinkWrap: true,
+            itemBuilder: (context, index) {
+              if (index == _movies.length) {
+                return Center(child: CircularProgressIndicator());
+              }
+              final movie = _movies[index];
+              return MovieCard(movie: movie);
+            },
+          ),
         ),
       ),
     );
