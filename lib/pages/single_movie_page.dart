@@ -239,7 +239,7 @@ class _SingleMoviePageState extends State<SingleMoviePage> {
         : movie.isEmpty
         ? Text("No Movies found")
         : SizedBox(
-            height: 220,
+            height: 241,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: movie.length,
@@ -273,14 +273,24 @@ class _SingleMoviePageState extends State<SingleMoviePage> {
                               ),
                             ),
                           const SizedBox(height: 5),
-                          Text(
-                            movie[index].title,
-                            style: const TextStyle(fontSize: 12),
+                          SizedBox(
+                            width: 100,
+                            child: Text(
+                              movie[index].title,
+                              maxLines: 2,
+                              textAlign: TextAlign.center,
+                              overflow: TextOverflow.ellipsis,
+
+                              style: const TextStyle(fontSize: 14),
+                            ),
                           ),
                           const SizedBox(height: 5),
                           Text(
                             "Vote: ${movie[index].voteAverage.toStringAsFixed(2)}",
-                            style: TextStyle(fontSize: 12),
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.red.shade900,
+                            ),
                           ),
                         ],
                       ),
