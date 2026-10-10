@@ -71,7 +71,7 @@ class _TvShowsPageState extends State<TvShowsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("TV Shows")),
+      appBar: AppBar(title: const Text("TV Shows")),
       body: Padding(
         padding: const EdgeInsets.only(top: 15),
         child: _error.isNotEmpty
@@ -87,13 +87,13 @@ class _TvShowsPageState extends State<TvShowsPage> {
                 },
                 child: SingleChildScrollView(
                   child: ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     scrollDirection: Axis.vertical,
                     itemCount: _tvShows.length + (_isLoading ? 1 : 0),
                     itemBuilder: (context, index) {
                       if (index == _tvShows.length) {
-                        return Center(child: CircularProgressIndicator());
+                        return const Center(child: const CircularProgressIndicator());
                       }
                       return TvShowCard(tvShow: _tvShows[index]);
                     },

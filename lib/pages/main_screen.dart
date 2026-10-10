@@ -12,7 +12,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  final _pages = [HomePage(), NowPlaying(), TvShowsPage(), SearchPage()];
+  final _pages = [const HomePage(), const NowPlaying(), const TvShowsPage(), const SearchPage()];
   int _selectedIndex = 0;
 
   @override
@@ -26,20 +26,20 @@ class _MainScreenState extends State<MainScreen> {
           });
         },
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+          const BottomNavigationBarItem(
             icon: Icon(Icons.play_circle),
             label: "Play Now",
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(Icons.movie_creation_outlined),
             label: "TV Shows",
           ),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
+          const BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
         ],
         unselectedItemColor: Colors.grey,
         selectedItemColor: Colors.red,
-        selectedLabelStyle: TextStyle(fontSize: 12),
+        selectedLabelStyle: const TextStyle(fontSize: 12),
       ),
       body: _pages[_selectedIndex],
     );

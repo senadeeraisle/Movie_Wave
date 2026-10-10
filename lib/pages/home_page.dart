@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_wave/models/movie_model.dart';
+import 'package:movie_wave/pages/single_movie_page.dart';
 import 'package:movie_wave/services/movie_service.dart';
 import 'package:movie_wave/widgets/movie_card.dart';
 
@@ -25,7 +26,7 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       _isLoading = true;
     });
-    await Future.delayed(Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: 1));
     try {
       final newMovies = await MovieService().getPopularMovies(
         page: _currentPage,
@@ -56,7 +57,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Home Page")),
+      appBar: AppBar(title: const Text("Home Page")),
       body: Padding(
         padding: const EdgeInsets.only(top: 15),
         child: NotificationListener<ScrollNotification>(
@@ -73,10 +74,20 @@ class _HomePageState extends State<HomePage> {
             shrinkWrap: true,
             itemBuilder: (context, index) {
               if (index == _movies.length) {
-                return Center(child: CircularProgressIndicator());
+                return const Center(child: const CircularProgressIndicator());
               }
               final movie = _movies[index];
-              return MovieCard(movie: movie);
+              return GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SingleMoviePage(movie: movie),
+                    ),
+                  );
+                },
+                child: MovieCard(movie: movie),
+              );
             },
           ),
         ),

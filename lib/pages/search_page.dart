@@ -46,10 +46,10 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Search")),
+      appBar: AppBar(title: const Text("Search")),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             children: [
               Row(
@@ -63,12 +63,12 @@ class _SearchPageState extends State<SearchPage> {
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(100),
-                          borderSide: BorderSide(width: 2),
+                          borderSide: const BorderSide(width: 2),
                         ),
                       ),
                     ),
                   ),
-                  SizedBox(width: 15),
+                  const SizedBox(width: 15),
                   Container(
                     height: 60,
                     width: 60,
@@ -81,22 +81,25 @@ class _SearchPageState extends State<SearchPage> {
                         onPressed: () {
                           _searchMovies();
                         },
-                        icon: Icon(Icons.search, size: 30),
+                        icon: const Icon(Icons.search, size: 30),
                       ),
                     ),
                   ),
                 ],
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               if (_isloading)
-                Center(child: CircularProgressIndicator())
+                const Center(child: const CircularProgressIndicator())
               else if (_error.isNotEmpty)
-                Text(_error, style: TextStyle(color: Colors.red, fontSize: 14))
+                Text(
+                  _error,
+                  style: const TextStyle(color: Colors.red, fontSize: 14),
+                )
               else if (_searchedMovies.isEmpty)
-                Text("No movies found. Please search!")
+                const Text("No movies found. Please search!")
               else
                 ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: _searchedMovies.length,
                   shrinkWrap: true,
                   itemBuilder: (context, index) {

@@ -68,9 +68,9 @@ class _NowPlayingState extends State<NowPlaying> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Now Playing")),
+      appBar: AppBar(title: const Text("Now Playing")),
       body: _isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : Column(
               children: [
                 Expanded(
@@ -99,14 +99,14 @@ class _NowPlayingState extends State<NowPlaying> {
       children: [
         ElevatedButton(
           onPressed: _currentPage > 1 ? goToPrevious : null,
-          child: Text("Previous Page"),
+          child: const Text("Previous Page"),
         ),
-        SizedBox(width: 20),
+        const SizedBox(width: 20),
         Text("$_currentPage of $_totalPages"),
-        SizedBox(width: 20),
+        const SizedBox(width: 20),
         ElevatedButton(
           onPressed: _currentPage < _totalPages ? goToNextPage : null,
-          child: Text("Next Page"),
+          child: const Text("Next Page"),
         ),
       ],
     );

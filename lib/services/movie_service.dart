@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -69,6 +68,72 @@ class MovieService {
     } catch (error) {
       print("Error on searching movies: $error");
       throw Exception("error on searching movie");
+    }
+  }
+
+  //method to get similer movies
+
+  Future<List<Movie>> getSimilerMovies({required int id}) async {
+    String url = "$_baseUrl/$id/similar?api_key=$_apiKey";
+    try {
+      final response = await http.get(Uri.parse(url));
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        List<dynamic> result = data["results"];
+        return result.take(10).map((movie) => Movie.fromJson(movie)).toList();
+      } else {
+        throw Exception("Error on loading similer movies");
+      }
+    } catch (error) {
+      print("error on loading similer movies $error");
+      throw Exception("Error on loading similer movies");
+    }
+  }
+
+  // method to get recommended movies
+  //recommendations
+  Future<List<Movie>> getRecommendedMovies({required int id}) async {
+    String url = "$_baseUrl/$id/recommendations?api_key=$_apiKey";
+    try {
+      final response = await http.get(Uri.parse(url));
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        List<dynamic> result = data["results"];
+        return result
+            .take(10)
+            .map((movieData) => Movie.fromJson(movieData))
+            .toList();
+      } else {
+        throw Exception("error pn loading recommended movies");
+      }
+    } catch (error) {
+      print("error pn loading recommended movies: $error");
+      throw Exception("error pn loading recommended movies");
+    }
+  }
+
+  //method to get images for relevent the movie
+  Future<List<String>> getMovieImages({required int id}) async {
+    String url = "$_baseUrl/$id/images?api_key=$_apiKey";
+
+    try {
+      final response = await http.get(Uri.parse(url));
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        List<dynamic> backdrops = data["backdrops"];
+        return backdrops
+            .take(10)
+            .map(
+              (image) =>
+                  "https://image.tmdb.org/t/p/w500/${image["file_path"]}",
+            )
+            .toList();
+      } else {
+        throw Exception("error on loading images");
+      }
+    } catch (error) {
+      print("error on loading images: $error");
+      throw Exception("error on loading images");
     }
   }
 }
